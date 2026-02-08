@@ -15,6 +15,8 @@ required packages to install:
 to verify if installed:
 uname -r
 bpftool version
+clang --version
+ip link
 
 
 
@@ -22,10 +24,10 @@ bpftool version
 
 
 How to run:
-
+chmod +x scripts/*.sh
 make clean
-make =-> this is compilation should product xdp_prog.o
-ip link => to 
+make =-> this is compilation should produce xdp_prog.o
+ip link => to find the network interface of your system. check "2:"
 sudo ./scripts/load_xdp.sh -> (use this command whenever you want to start the xdp prog)
 ip link show ens33 => to verify if it is attached. 
 sudo bpftool map show
@@ -39,7 +41,8 @@ once done, to do thus => sudo ./scripts/unload_xdp.sh
 
 
 Activate venv for python: 
-- activate the venv
+- activate the venv => source /home/avii09/Desktop/xdp-ddos/.venv/bin/activate
+- chmod +x userspace/stats_reader.py
 - execute this command to start python script => sudo .venv/bin/python userspace/stats_reader.py
 - the python script is done for reading the stats bpf map and it will calculate the pps and bps and print. 
 
@@ -63,6 +66,7 @@ FLOW OF THE PROJECT: (this is exactly how to run the project)
 3. in windows (or your host machine) => .\iperf3.exe -c 192.168.1.66 -u -b 50M -t 20
 4. in vm, new terminal, activate venv, => sudo .venv/bin/python userspace/stats_reader.py
 5. observe the traffic. 
+6. UNLOAD THE XDP => sudo ./scripts/unload_xdp.sh
 
 
 
